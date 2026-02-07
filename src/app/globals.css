@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..700;1,9..40,100..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radar-bg: #0b0f1a;
+  --radar-surface: #111827;
+  --radar-card: #1a2236;
+  --radar-border: #1e293b;
+  --radar-accent: #3b82f6;
+  --radar-up: #22c55e;
+  --radar-down: #ef4444;
+  --radar-text: #e2e8f0;
+  --radar-muted: #94a3b8;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--radar-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--radar-border);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--radar-muted);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-color: var(--radar-border) var(--radar-bg);
+  scrollbar-width: thin;
+}
+
+/* Body defaults */
+body {
+  @apply bg-radar-bg text-radar-text font-sans antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Font utilities */
+.font-price {
+  @apply font-mono;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Smooth transitions for interactive elements */
+@layer components {
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    @apply transition-colors duration-200 ease;
+  }
+
+  /* Card hover effect - subtle glow and lift */
+  .card-hover {
+    @apply transition-all duration-300 ease;
+  }
+
+  .card-hover:hover {
+    @apply transform -translate-y-1 shadow-lg;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+  }
+
+  /* Price color utilities */
+  .price-up {
+    @apply text-radar-up font-price font-semibold;
+  }
+
+  .price-down {
+    @apply text-radar-down font-price font-semibold;
+  }
+
+  /* Loading skeleton animation */
+  @keyframes skeleton-shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .skeleton {
+    @apply bg-radar-card rounded;
+    background-image: linear-gradient(
+      90deg,
+      var(--radar-card) 0%,
+      var(--radar-surface) 50%,
+      var(--radar-card) 100%
+    );
+    background-size: 1000px 100%;
+    animation: skeleton-shimmer 2s infinite;
+  }
+
+  /* Link styles */
+  a {
+    @apply text-radar-accent hover:text-blue-400;
+  }
+
+  /* Focus states for accessibility */
+  button:focus,
+  a:focus,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply outline-none ring-2 ring-radar-accent ring-offset-2;
+    ring-offset-color: var(--radar-bg);
+  }
+}
+
+/* Utility classes for custom colors */
+.bg-radar-bg {
+  background-color: var(--radar-bg);
+}
+
+.bg-radar-surface {
+  background-color: var(--radar-surface);
+}
+
+.bg-radar-card {
+  background-color: var(--radar-card);
+}
+
+.bg-radar-border {
+  background-color: var(--radar-border);
+}
+
+.text-radar-text {
+  color: var(--radar-text);
+}
+
+.text-radar-muted {
+  color: var(--radar-muted);
+}
+
+.text-radar-accent {
+  color: var(--radar-accent);
+}
+
+.border-radar {
+  border-color: var(--radar-border);
+}
+
+.divide-radar {
+  divide-color: var(--radar-border);
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-4 py-2 bg-radar-accent text-white rounded-lg font-medium hover:bg-blue-600 active:bg-blue-700 transition-colors;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-radar-surface text-radar-text border border-radar-border rounded-lg font-medium hover:bg-radar-card transition-colors;
+}
+
+.btn-ghost {
+  @apply px-4 py-2 text-radar-text hover:bg-radar-surface rounded-lg font-medium transition-colors;
+}
+
+/* Card styles */
+.card {
+  @apply bg-radar-card border border-radar-border rounded-xl p-6;
+}
+
+.card-interactive {
+  @apply card card-hover;
+}
