@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const dynamic = 'force-dynamic';
+// ISR: serve cached HTML, revalidate in background every hour
 export const revalidate = 3600;
 
 async function getTrendingData() {

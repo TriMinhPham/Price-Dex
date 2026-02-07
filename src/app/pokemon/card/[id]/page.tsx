@@ -20,7 +20,7 @@ import PriceTiers from '@/components/PriceTiers';
 import AffiliateButton from '@/components/AffiliateButton';
 import CardGrid from '@/components/CardGrid';
 
-export const dynamic = 'force-dynamic';
+// ISR: serve cached HTML, revalidate in background every hour
 export const revalidate = 3600;
 
 /**

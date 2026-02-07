@@ -7,7 +7,7 @@ import { formatDate } from '@/lib/format';
 import AffiliateButton from '@/components/AffiliateButton';
 import { ONEPIECE_CARD_TYPES, ONEPIECE_COLORS, OnePieceColor } from '@/types/onepiece';
 
-export const dynamic = 'force-dynamic';
+// ISR: serve cached HTML, revalidate in background every hour
 export const revalidate = 3600;
 
 export async function generateStaticParams() {

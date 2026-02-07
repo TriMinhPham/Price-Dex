@@ -8,7 +8,9 @@ import { PokemonCard, PokemonSet, ApiResponse } from '@/types/card';
 const BASE_URL = 'https://api.pokemontcg.io/v2';
 const DEFAULT_PAGE_SIZE = 50;
 const RATE_LIMIT_DELAY = 100; // ms between requests
-const FETCH_TIMEOUT = 30000; // 30s timeout for API calls
+const FETCH_TIMEOUT = 8_000; // 8s timeout — fail fast, let ISR/CDN cache handle retries
+const RETRY_DELAY = 1_000; // 1s between retries (down from 2s)
+const MAX_RETRIES = 2; // 2 retries max (down from 3)
 
 interface RequestOptions {
   headers?: Record<string, string>;
@@ -62,7 +64,7 @@ class PokemonTCGClient {
     endpoint: string,
     options: RequestOptions = {}
   ): Promise<T> {
-    const { headers = {}, retries = 3 } = options;
+    const { headers = {}, retries = MAX_RETRIES } = options;
 
     await this.enforceRateLimit();
 
@@ -108,7 +110,7 @@ class PokemonTCGClient {
       // Retry on timeout/abort errors
       if (retries > 0 && error instanceof Error && error.name === 'AbortError') {
         console.warn(`API request timed out for ${endpoint}, retrying... (${retries} left)`);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
         return this.request<T>(endpoint, { ...options, retries: retries - 1 });
       }
       if (error instanceof Error) {

@@ -5,7 +5,7 @@ import { onePieceTCGClient } from '@/lib/onepiece-tcg-api';
 import { SITE_URL } from '@/lib/seo';
 import { formatDate } from '@/lib/format';
 
-export const dynamic = 'force-dynamic';
+// ISR: serve cached HTML, revalidate in background every hour
 export const revalidate = 3600;
 
 /**
