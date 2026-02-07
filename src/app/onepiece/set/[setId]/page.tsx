@@ -5,7 +5,7 @@ import { onePieceTCGClient } from '@/lib/onepiece-tcg-api';
 import { SITE_URL } from '@/lib/seo';
 import { formatDate } from '@/lib/format';
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 /**
  * Generate static params for popular One Piece sets

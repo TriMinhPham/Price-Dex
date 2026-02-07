@@ -20,7 +20,7 @@ import PriceTiers from '@/components/PriceTiers';
 import AffiliateButton from '@/components/AffiliateButton';
 import CardGrid from '@/components/CardGrid';
 
-export const revalidate = 86400;
+export const revalidate = 3600; // Revalidate every hour (allows failed pages to retry sooner)
 
 /**
  * Generate static params for popular cards (ISR for others)

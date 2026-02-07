@@ -7,7 +7,8 @@ import { PokemonCard, PokemonSet, ApiResponse } from '@/types/card';
 
 const BASE_URL = 'https://api.pokemontcg.io/v2';
 const DEFAULT_PAGE_SIZE = 50;
-const RATE_LIMIT_DELAY = 1000; // ms
+const RATE_LIMIT_DELAY = 100; // ms between requests
+const FETCH_TIMEOUT = 30000; // 30s timeout for API calls
 
 interface RequestOptions {
   headers?: Record<string, string>;
@@ -39,7 +40,7 @@ class PokemonTCGClient {
   }
 
   /**
-   * Respect rate limiting by adding delay between requests
+   * Respect rate limiting by adding small delay between requests
    */
   private async enforceRateLimit(): Promise<void> {
     const now = Date.now();
@@ -70,13 +71,14 @@ class PokemonTCGClient {
 
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+      const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
 
       const response = await fetch(url, {
         method: 'GET',
         headers: mergedHeaders,
         signal: controller.signal,
-      });
+        next: { revalidate: 3600 }, // Cache API responses for 1 hour
+      } as RequestInit);
 
       clearTimeout(timeoutId);
 
@@ -104,6 +106,12 @@ class PokemonTCGClient {
       const data: T = await response.json();
       return data;
     } catch (error) {
+      // Retry on timeout/abort errors
+      if (retries > 0 && error instanceof Error && error.name === 'AbortError') {
+        console.warn(`API request timed out for ${endpoint}, retrying... (${retries} left)`);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        return this.request<T>(endpoint, { ...options, retries: retries - 1 });
+      }
       if (error instanceof Error) {
         throw new Error(`Failed to fetch from Pokemon TCG API: ${error.message}`);
       }

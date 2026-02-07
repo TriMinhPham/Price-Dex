@@ -10,7 +10,7 @@ import {
 import { formatDate } from '@/lib/format';
 import CardGrid from '@/components/CardGrid';
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 /**
  * Generate static params for popular Pokemon sets

@@ -7,7 +7,7 @@ import { formatDate } from '@/lib/format';
 import AffiliateButton from '@/components/AffiliateButton';
 import { ONEPIECE_CARD_TYPES, ONEPIECE_COLORS, OnePieceColor } from '@/types/onepiece';
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 /**
  * Generate static params for popular One Piece cards
