@@ -13,16 +13,7 @@ export const revalidate = 3600;
  * Generate static params for popular One Piece cards
  */
 export async function generateStaticParams() {
-  const popularCardIds = [
-    'OP01-001',
-    'OP01-060',
-    'OP01-120',
-    'OP02-001',
-  ];
-
-  return popularCardIds.map((id) => ({
-    id,
-  }));
+  return []; // Generate on-demand via ISR to avoid API timeouts during build
 }
 
 /**

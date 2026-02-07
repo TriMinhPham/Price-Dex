@@ -16,18 +16,7 @@ export const revalidate = 3600;
  * Generate static params for popular Pokemon sets
  */
 export async function generateStaticParams() {
-  const popularSetIds = [
-    'base1', // Base Set
-    'base2', // Jungle
-    'base3', // Fossil
-    'base4', // Base Set 2
-    'swsh1', // Sword & Shield
-    'sv01', // Scarlet & Violet
-  ];
-
-  return popularSetIds.map((setId) => ({
-    setId,
-  }));
+  return []; // Generate on-demand via ISR to avoid API timeouts during build
 }
 
 /**

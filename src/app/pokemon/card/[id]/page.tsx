@@ -23,21 +23,11 @@ import CardGrid from '@/components/CardGrid';
 export const revalidate = 3600; // Revalidate every hour (allows failed pages to retry sooner)
 
 /**
- * Generate static params for popular cards (ISR for others)
+ * Don't pre-render any cards at build time — generate on-demand via ISR
+ * This avoids API timeouts during Vercel builds
  */
 export async function generateStaticParams() {
-  // Popular Pokemon cards to pre-render
-  const popularCardIds = [
-    'base1-4', // Charizard Base Set
-    'sv1-235', // Charizard ex SV
-    'base1-102', // Mewtwo Base Set
-    'base1-103', // Zapdos Base Set
-    'base1-13', // Machamp Base Set
-  ];
-
-  return popularCardIds.map((id) => ({
-    id,
-  }));
+  return [];
 }
 
 /**

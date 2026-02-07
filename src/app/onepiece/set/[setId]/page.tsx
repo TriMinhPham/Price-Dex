@@ -11,17 +11,7 @@ export const revalidate = 3600;
  * Generate static params for popular One Piece sets
  */
 export async function generateStaticParams() {
-  const popularSetIds = [
-    'OP01',
-    'OP02',
-    'OP03',
-    'OP04',
-    'OP05',
-  ];
-
-  return popularSetIds.map((setId) => ({
-    setId,
-  }));
+  return []; // Generate on-demand via ISR to avoid API timeouts during build
 }
 
 /**
