@@ -10,14 +10,8 @@ import {
 import { formatDate } from '@/lib/format';
 import CardGrid from '@/components/CardGrid';
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
-
-/**
- * Generate static params for popular Pokemon sets
- */
-export async function generateStaticParams() {
-  return []; // Generate on-demand via ISR to avoid API timeouts during build
-}
 
 /**
  * Generate metadata for the Pokemon set page

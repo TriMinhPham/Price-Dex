@@ -5,14 +5,8 @@ import { onePieceTCGClient } from '@/lib/onepiece-tcg-api';
 import { SITE_URL } from '@/lib/seo';
 import { formatDate } from '@/lib/format';
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
-
-/**
- * Generate static params for popular One Piece sets
- */
-export async function generateStaticParams() {
-  return []; // Generate on-demand via ISR to avoid API timeouts during build
-}
 
 /**
  * Generate metadata for the One Piece set page

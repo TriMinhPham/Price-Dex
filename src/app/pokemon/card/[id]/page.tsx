@@ -20,15 +20,8 @@ import PriceTiers from '@/components/PriceTiers';
 import AffiliateButton from '@/components/AffiliateButton';
 import CardGrid from '@/components/CardGrid';
 
-export const revalidate = 3600; // Revalidate every hour (allows failed pages to retry sooner)
-
-/**
- * Don't pre-render any cards at build time — generate on-demand via ISR
- * This avoids API timeouts during Vercel builds
- */
-export async function generateStaticParams() {
-  return [];
-}
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 /**
  * Generate metadata for the Pokemon card page

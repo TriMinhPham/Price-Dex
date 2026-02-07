@@ -77,8 +77,7 @@ class PokemonTCGClient {
         method: 'GET',
         headers: mergedHeaders,
         signal: controller.signal,
-        next: { revalidate: 3600 }, // Cache API responses for 1 hour
-      } as RequestInit);
+      });
 
       clearTimeout(timeoutId);
 

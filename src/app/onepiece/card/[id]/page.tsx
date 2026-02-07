@@ -7,11 +7,9 @@ import { formatDate } from '@/lib/format';
 import AffiliateButton from '@/components/AffiliateButton';
 import { ONEPIECE_CARD_TYPES, ONEPIECE_COLORS, OnePieceColor } from '@/types/onepiece';
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
 
-/**
- * Generate static params for popular One Piece cards
- */
 export async function generateStaticParams() {
   return []; // Generate on-demand via ISR to avoid API timeouts during build
 }
