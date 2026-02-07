@@ -4,6 +4,10 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://price-dex.com'),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     template: '%s | PriceDex',
     default: 'PriceDex — TCG Price Intelligence',
