@@ -69,10 +69,16 @@ class PokemonTCGClient {
     const mergedHeaders = { ...this.getHeaders(), ...headers };
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
       const response = await fetch(url, {
         method: 'GET',
         headers: mergedHeaders,
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       // Handle rate limiting
       if (response.status === 429) {

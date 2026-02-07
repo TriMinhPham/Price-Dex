@@ -3,6 +3,10 @@ import { pokemonTCGClient } from '@/lib/pokemon-tcg-api';
 import { onePieceTCGClient } from '@/lib/onepiece-tcg-api';
 import { SITE_URL } from '@/lib/seo';
 
+// Make sitemap dynamic so it doesn't block build
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // regenerate every hour
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
 
