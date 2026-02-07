@@ -21,22 +21,22 @@ export function generateEbaySearchUrl(
 }
 
 /**
- * Wrap an eBay URL with affiliate tracking
+ * Wrap an eBay URL with affiliate tracking using EPN smart link format
  */
 export function generateEbayAffiliateUrl(
   searchUrl: string,
   campaignId?: string
 ): string {
   const cid = campaignId || process.env.EBAY_CAMPAIGN_ID || '';
-  const encodedUrl = encodeURIComponent(searchUrl);
 
   // If no campaign ID, return direct eBay link
   if (!cid) {
     return searchUrl;
   }
 
-  // eBay Partner Network rover URL format
-  return `https://rover.ebay.com/rover/1/711-53200-19255-0/1?campid=${cid}&toolid=10001&customid=pricedex&mpre=${encodedUrl}`;
+  // eBay Partner Network smart link format — appends tracking params directly
+  const separator = searchUrl.includes('?') ? '&' : '?';
+  return `${searchUrl}${separator}mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=${cid}&customid=pricedex&toolid=10001&mkevt=1`;
 }
 
 /**
