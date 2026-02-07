@@ -65,12 +65,12 @@ html {
   input,
   textarea,
   select {
-    @apply transition-colors duration-200 ease;
+    @apply transition-colors duration-200 ease-in-out;
   }
 
   /* Card hover effect - subtle glow and lift */
   .card-hover {
-    @apply transition-all duration-300 ease;
+    @apply transition-all duration-300 ease-in-out;
   }
 
   .card-hover:hover {
