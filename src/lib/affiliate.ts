@@ -27,9 +27,16 @@ export function generateEbayAffiliateUrl(
   searchUrl: string,
   campaignId?: string
 ): string {
-  const cid = campaignId || process.env.EBAY_CAMPAIGN_ID || '1';
+  const cid = campaignId || process.env.EBAY_CAMPAIGN_ID || '';
   const encodedUrl = encodeURIComponent(searchUrl);
-  return `https://rover.ebay.com/rover/1/${cid}/1?mpre=${encodedUrl}`;
+
+  // If no campaign ID, return direct eBay link
+  if (!cid) {
+    return searchUrl;
+  }
+
+  // eBay Partner Network rover URL format
+  return `https://rover.ebay.com/rover/1/711-53200-19255-0/1?campid=${cid}&toolid=10001&customid=pricedex&mpre=${encodedUrl}`;
 }
 
 /**
@@ -61,7 +68,7 @@ export function generateTCGPlayerAffiliateUrl(
   }
 
   const separator = url.includes('?') ? '&' : '?';
-  return `${url}${separator}partner=${affId}`;
+  return `${url}${separator}utm_campaign=affiliate&utm_medium=${affId}&utm_source=pricedex&partner=${affId}`;
 }
 
 /**
