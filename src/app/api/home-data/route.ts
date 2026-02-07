@@ -12,6 +12,9 @@ import { getMarketMovers } from '@/lib/price-service';
 
 /** Hard ceiling so a slow upstream can never stall the response */
 const HARD_TIMEOUT_MS = 6_000;
+// Next.js 15: GET route handlers are dynamic by default; force ISR caching at CDN.
+export const dynamic = 'force-static';
+export const revalidate = 300;
 
 function withTimeout<T>(promise: Promise<T>, fallback: T): Promise<T> {
   return Promise.race([
@@ -36,13 +39,5 @@ export async function GET() {
     ),
   ]);
 
-  return NextResponse.json(
-    { recentCards, recentOnePieceCards, marketMovers },
-    {
-      headers: {
-        // Vercel CDN: serve stale for 300s, revalidate in background
-        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
-      },
-    },
-  );
+  return NextResponse.json({ recentCards, recentOnePieceCards, marketMovers });
 }
