@@ -5,6 +5,9 @@ import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://price-dex.com'),
+  verification: {
+    google: 'tUTYyOKHDQjD3vSPDHTyhyPB7z5UafgUaGOc3mhjAIU',
+  },
   alternates: {
     canonical: '/',
   },
