@@ -1,4 +1,4 @@
-# PriceRadar — TCG Price Intelligence Site
+# PriceDex — TCG Price Intelligence Site
 ## Project Brief for Claude Cowork
 
 > Drop this file in your Cowork workspace folder. Claude will read it and know everything from our conversation.
@@ -15,7 +15,7 @@
 
 ## THE BUSINESS
 
-**PriceRadar** — a programmatic SEO content site that tracks Pokémon TCG card prices across marketplaces. Every card gets its own page targeting long-tail keywords like "[card name] price" / "[card name] value" / "[card name] worth."
+**PriceDex** — a programmatic SEO content site that tracks Pokémon TCG card prices across marketplaces. Every card gets its own page targeting long-tail keywords like "[card name] price" / "[card name] value" / "[card name] worth."
 
 ### Why Pokémon
 - Largest TCG by sales volume globally (Q1 2026)
@@ -52,7 +52,7 @@ Content creation → SEO indexing → organic traffic → affiliate clicks → r
 
 ### Domain
 - User mentioned "tcg.kai.now" — needs clarification. Likely needs to purchase a proper domain.
-- Suggested alternatives: priceradar.gg, tcgradar.io, or similar
+- Suggested alternatives: pricedex.gg, tcgradar.io, or similar
 
 ### What Needs to Be Built
 1. Next.js project with SSG (static pages for every card = SEO gold)
@@ -76,7 +76,7 @@ Content creation → SEO indexing → organic traffic → affiliate clicks → r
 
 ## UI/DESIGN DIRECTION
 
-A working React demo (PriceRadar.jsx) was already built with:
+A working React demo (PriceDex.jsx) was already built with:
 - Dark theme (#0b0f1a background)
 - DM Sans + JetBrains Mono fonts
 - Card table with price tiers (Raw, PSA 9, PSA 10)
